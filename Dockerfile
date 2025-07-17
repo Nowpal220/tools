@@ -49,8 +49,13 @@ RUN go install -v github.com/projectdiscovery/subfinder/v2/cmd/subfinder@latest 
 RUN go install github.com/ffuf/ffuf@latest && \
     ln -s $GOPATH/bin/ffuf /usr/local/bin/ffuf
 
-# Install WhatWeb
-RUN gem install whatweb
+# Dependencies Ruby untuk WhatWeb
+RUN apt-get update && apt-get install -y libffi-dev libreadline-dev zlib1g-dev
+
+# Install WhatWeb manual (lebih stabil)
+RUN git clone https://github.com/urbanadventurer/WhatWeb /opt/whatweb && \
+    ln -s /opt/whatweb/whatweb /usr/local/bin/whatweb && \
+    chmod +x /opt/whatweb/whatweb
 
 # Install Liffy
 RUN git clone https://github.com/bcoles/liffy.git /opt/liffy && \
