@@ -57,11 +57,11 @@ RUN git clone https://github.com/urbanadventurer/WhatWeb /opt/whatweb && \
     ln -s /opt/whatweb/whatweb /usr/local/bin/whatweb && \
     chmod +x /opt/whatweb/whatweb
 
-# Install Liffy
-RUN git clone https://github.com/bcoles/liffy.git /opt/liffy && \
-    ln -s /opt/liffy/liffy.py /usr/local/bin/liffy && chmod +x /opt/liffy/liffy.py
-
-
+# Install Liffy LFI scanner (mzfr fork)
+RUN git clone https://github.com/mzfr/liffy.git /opt/liffy && \
+    ln -s /opt/liffy/liffy.py /usr/local/bin/liffy && \
+    chmod +x /opt/liffy/liffy.py
+    
 RUN npm install --global npm@latest typescript ts-node @types/node
 RUN npm install -g pm2
 
