@@ -17,20 +17,27 @@ RUN apt update && apt upgrade -y && \
     ca-certificates jq net-tools dnsutils
 
 # Menginstal Node.js & npm (menggunakan cara yang lebih stabil)
+# yeah
 RUN curl -fsSL https://deb.nodesource.com/setup_lts.x | bash - && \
     apt install -y nodejs
 
 # Menginstal sqlmap
 RUN pip3 install sqlmap
 
-# Menginstal Nuclei
+# --- PERBAIKAN UNTUK GO TOOLS ---
+# Bersihkan cache Go sebelum instalasi
+RUN go clean -modcache
+
+# Menginstal Nuclei secara eksplisit dengan go install
+# PENTING: Untuk Go versi 1.16 ke atas, go install sudah mengunduh dan membangun binary ke GOPATH/bin
 RUN GO111MODULE=on go install -v github.com/projectdiscovery/nuclei/v2/cmd/nuclei@latest
 
-# Menginstal Subfinder
+# Menginstal Subfinder secara eksplisit
 RUN GO111MODULE=on go install -v github.com/projectdiscovery/subfinder/v2/cmd/subfinder@latest
 
-# Menginstal FFUF
+# Menginstal FFUF secara eksplisit
 RUN GO111MODULE=on go install github.com/ffuf/ffuf@latest
+# --- AKHIR PERBAIKAN GO TOOLS ---
 
 # Menginstal WhatWeb
 RUN gem install whatweb
