@@ -13,7 +13,7 @@ RUN apt-get update && apt-get upgrade -y && \
     git curl wget unzip neofetch imagemagick build-essential \
     default-jre nmap hydra tini ruby ruby-dev \
     libpcap-dev libcurl4-openssl-dev libssl-dev \
-    ca-certificates jq net-tools dnsutils software-properties-common
+    ca-certificates libgmp-dev jq net-tools dnsutils software-properties-common
 
 
 
@@ -71,4 +71,3 @@ COPY --chown=container:container ./../entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 ENTRYPOINT ["/usr/bin/tini", "-g", "--"]
 CMD ["/entrypoint.sh"]
-
