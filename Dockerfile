@@ -24,13 +24,13 @@ RUN curl -fsSL https://deb.nodesource.com/setup_lts.x | bash - && \
 RUN pip3 install sqlmap
 
 # Menginstal Nuclei
-RUN go install -v github.com/projectdiscovery/nuclei/v2/cmd/nuclei@latest
+RUN GO111MODULE=on go install -v github.com/projectdiscovery/nuclei/v2/cmd/nuclei@latest
 
 # Menginstal Subfinder
-RUN go install -v github.com/projectdiscovery/subfinder/v2/cmd/subfinder@latest
+RUN GO111MODULE=on go install -v github.com/projectdiscovery/subfinder/v2/cmd/subfinder@latest
 
 # Menginstal FFUF
-RUN go install github.com/ffuf/ffuf@latest
+RUN GO111MODULE=on go install github.com/ffuf/ffuf@latest
 
 # Menginstal WhatWeb
 RUN gem install whatweb
