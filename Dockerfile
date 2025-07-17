@@ -20,9 +20,9 @@ RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - && \
 RUN pip3 install sqlmap
 
 # Install Dalfox
-RUN go install github.com/hahwul/dalfox/v2@latest && \
-    ln -s $GOPATH/bin/dalfox /usr/local/bin/dalfox
-
+RUN git clone https://github.com/hahwul/dalfox.git /opt/dalfox && \
+    cd /opt/dalfox && go build -o dalfox . && \
+    mv dalfox /usr/local/bin/dalfox
 # Install Nuclei
 RUN go install -v github.com/projectdiscovery/nuclei/v2/cmd/nuclei@latest && \
     ln -s $GOPATH/bin/nuclei /usr/local/bin/nuclei
